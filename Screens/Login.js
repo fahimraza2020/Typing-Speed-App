@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, Image, Button, Modal, TouchableHighlight, Alert } from 'react-native'
+import { Text, View, Image, Button, Modal, TouchableHighlight, ImageBackground } from 'react-native'
+import { Container, Content, Form, Item, Input, Label } from 'native-base';
 
 class Login extends Component {
     state = {
@@ -35,24 +36,59 @@ class Login extends Component {
                     animationType="slide"
                     transparent={false}
                     visible={this.state.modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
-                        this.setModalVisible(!this.state.modalVisible);
-                    }}>
-                    <View style={{ marginTop: 22 }}>
-                        <View>
-                            <Text>Hello World!</Text>
+                >
+                    <ImageBackground style={{ flex: 1, justifyContent: 'center' }} source={require('../Images/assign.jpeg')} >
+                        <View style={{flex: 0.5 ,  width: '80%', borderWidth: 1, padding: 10, borderColor: 'black', backgroundColor: 'white', alignSelf: 'center' }}>
+                            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 24 }}>Login</Text>
+                            <Container>
+                                <Content>
+                                    <Form>
+                                        <Item floatingLabel>
+                                            <Label>Username</Label>
+                                            <Input style={{ padding: 10 }} />
+                                        </Item>
+                                        <Item floatingLabel last>
+                                            <Label>Password</Label>
+                                            <Input style={{ padding: 10 }} />
+                                        </Item>
+                                    </Form>
+                                    <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'center' }}>
+                                        <TouchableHighlight style={{ padding: 20, borderWidth: 1, borderColor: 'black' }}>
+                                            <Text>
+                                                Easy
+                                            </Text>
+                                        </TouchableHighlight>
+                                        <TouchableHighlight style={{ padding: 20, borderWidth: 1, borderColor: 'black' }}>
+                                            <Text>
+                                                Medium
+                                            </Text>
+                                        </TouchableHighlight>
+                                        <TouchableHighlight style={{ padding: 20, borderWidth: 1, borderColor: 'black' }}>
+                                            <Text>
+                                                Hard
+                                            </Text>
+                                        </TouchableHighlight>
+                                    </View>
+                                    <View style={{ justifyContent: 'center', marginTop: 8 }}>
+                                        <TouchableHighlight style={{ padding: 15, backgroundColor: 'blue' }}>
+                                            <Text style={{ textAlign: 'center', color: 'white' }}>
+                                                Start
+                                            </Text>
+                                        </TouchableHighlight>
+                                    </View>
+                                </Content>
+                            </Container>
 
-                            <TouchableHighlight
+                            {/* <TouchableHighlight
                                 onPress={() => {
                                     this.setModalVisible(!this.state.modalVisible);
                                 }}>
                                 <Text>Hide Modal</Text>
-                            </TouchableHighlight>
+                            </TouchableHighlight> */}
                         </View>
-                    </View>
+                    </ImageBackground>
                 </Modal>
-            </View>
+            </View >
         )
     }
 }
