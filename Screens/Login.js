@@ -3,12 +3,27 @@ import { Text, View, Image, Button, Modal, TouchableHighlight, ImageBackground }
 import { Container, Content, Form, Item, Input, Label } from 'native-base';
 
 class Login extends Component {
-    state = {
-        modalVisible: false,
-    };
+
+    constructor() {
+        super()
+        this.state = {
+            modalVisible: false,
+            userName: '',
+            password: '',
+            difficulty: '',
+            background: '',
+            backgroundtwo: '',
+            backgroundthree: ''
+        };
+    }
 
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });
+    }
+
+    start() {
+        const { userName, password, difficulty } = this.state
+        console.log(userName, ' / ', password, ' / ', difficulty)
     }
 
     render() {
@@ -38,39 +53,47 @@ class Login extends Component {
                     visible={this.state.modalVisible}
                 >
                     <ImageBackground style={{ flex: 1, justifyContent: 'center' }} source={require('../Images/assign.jpeg')} >
-                        <View style={{flex: 0.5 ,  width: '80%', borderWidth: 1, padding: 10, borderColor: 'black', backgroundColor: 'white', alignSelf: 'center' }}>
+                        <View style={{ flex: 0.5, width: '80%', borderWidth: 1, padding: 10, borderColor: 'black', backgroundColor: 'white', alignSelf: 'center' }}>
                             <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 24 }}>Login</Text>
                             <Container>
                                 <Content>
                                     <Form>
                                         <Item floatingLabel>
                                             <Label>Username</Label>
-                                            <Input style={{ padding: 10 }} />
+                                            <Input style={{ padding: 10 }} onChangeText={(e) => this.setState({ userName: e })} />
                                         </Item>
                                         <Item floatingLabel last>
                                             <Label>Password</Label>
-                                            <Input style={{ padding: 10 }} />
+                                            <Input
+                                                style={{ padding: 10 }}
+                                                onChangeText={(e) => this.setState({ password: e })}
+                                                autoCapitalize="none"
+                                                autoCorrect={false}
+                                                keyboardType="default"
+                                                returnKeyType="send"
+                                                secureTextEntry={true}
+                                            />
                                         </Item>
                                     </Form>
                                     <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'center' }}>
-                                        <TouchableHighlight style={{ padding: 20, borderWidth: 1, borderColor: 'black' }}>
+                                        <TouchableHighlight style={{ padding: 20, borderWidth: 1, borderColor: 'black', backgroundColor: this.state.background }} onPress={() => this.setState({ difficulty: 'Easy', background: 'gray', backgroundtwo: '', backgroundthree: '' })}>
                                             <Text>
                                                 Easy
                                             </Text>
                                         </TouchableHighlight>
-                                        <TouchableHighlight style={{ padding: 20, borderWidth: 1, borderColor: 'black' }}>
+                                        <TouchableHighlight style={{ padding: 20, borderWidth: 1, borderColor: 'black', backgroundColor: this.state.backgroundtwo }} onPress={() => this.setState({ difficulty: 'Medium', backgroundtwo: 'gray', background: '', backgroundthree: '' })}>
                                             <Text>
                                                 Medium
                                             </Text>
                                         </TouchableHighlight>
-                                        <TouchableHighlight style={{ padding: 20, borderWidth: 1, borderColor: 'black' }}>
+                                        <TouchableHighlight style={{ padding: 20, borderWidth: 1, borderColor: 'black', backgroundColor: this.state.backgroundthree }} onPress={() => this.setState({ difficulty: 'Hard', backgroundthree: 'gray', background: '', backgroundtwo: '' })}>
                                             <Text>
                                                 Hard
                                             </Text>
                                         </TouchableHighlight>
                                     </View>
                                     <View style={{ justifyContent: 'center', marginTop: 8 }}>
-                                        <TouchableHighlight style={{ padding: 15, backgroundColor: 'blue' }}>
+                                        <TouchableHighlight style={{ padding: 15, backgroundColor: 'blue' }} onPress={this.start.bind(this)}>
                                             <Text style={{ textAlign: 'center', color: 'white' }}>
                                                 Start
                                             </Text>
@@ -78,13 +101,6 @@ class Login extends Component {
                                     </View>
                                 </Content>
                             </Container>
-
-                            {/* <TouchableHighlight
-                                onPress={() => {
-                                    this.setModalVisible(!this.state.modalVisible);
-                                }}>
-                                <Text>Hide Modal</Text>
-                            </TouchableHighlight> */}
                         </View>
                     </ImageBackground>
                 </Modal>
